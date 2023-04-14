@@ -227,6 +227,7 @@ def prepare_environment():
 
     torch_command = os.environ.get('TORCH_COMMAND', "pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu118")
     requirements_file = os.environ.get('REQS_FILE', "requirements_versions.txt")
+    deforum_requirements = os.environ.get('DEFORUM_REQS', "deforum_requirements.txt")
 
     xformers_package = os.environ.get('XFORMERS_PACKAGE', 'xformers==0.0.17')
     gfpgan_package = os.environ.get('GFPGAN_PACKAGE', "git+https://github.com/TencentARC/GFPGAN.git@8d2447a2d918f8eba5a4a01463fd48e45126a379")
@@ -298,6 +299,9 @@ def prepare_environment():
         requirements_file = os.path.join(script_path, requirements_file)
     run_pip(f"install -r \"{requirements_file}\"", "requirements for Web UI")
 
+    if not os.path.isfile(deforum_requirements):
+        deforum_requirements = os.path.join(script_path, deforum_requirements)
+    run_pip(f"install -r \"{deforum_requirements}\"", "requirements for Web UI")
     run_extensions_installers(settings_file=args.ui_settings_file)
 
     if args.update_check:
