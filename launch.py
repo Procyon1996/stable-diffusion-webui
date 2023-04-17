@@ -301,7 +301,7 @@ def prepare_environment():
 
     if not os.path.isfile(deforum_requirements):
         deforum_requirements = os.path.join(script_path, deforum_requirements)
-    run_pip(f"install -r \"{deforum_requirements}\"", "requirements for Web UI")
+    run_pip(f"install -r \"{deforum_requirements}\"", "deforum requirements for Web UI")
     run_extensions_installers(settings_file=args.ui_settings_file)
 
     if args.update_check:

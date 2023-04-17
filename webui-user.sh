@@ -45,9 +45,9 @@
 
 ###########################################
 echo "start webui-user.sh"
-rm -r stable-diffusion-webui/models
-rm -r stable-diffusion-webui/extensions
-rm -r stable-diffusion-webui/embeddings
+rm -r /app/stable-diffusion-webui/models
+rm -r /app/stable-diffusion-webui/extensions
+rm -r /app/stable-diffusion-webui/embeddings
 
 # user storage space sd
 #      |-- models
@@ -58,12 +58,12 @@ rm -r stable-diffusion-webui/embeddings
 mkdir -p /ark-contexts/data/sd/models /ark-contexts/data/sd/embeddings /ark-contexts/data/sd/extensions /ark-contexts/data/sd/outputs
 touch /ark-contexts/data/sd/styles.csv
 
-ln -s /ark-contexts/data/sd/models stable-diffusion-webui/models
-ln -s /ark-contexts/data/sd/extensions stable-diffusion-webui/extensions
-ln -s /ark-contexts/data/sd/embeddings stable-diffusion-webui/embeddings
-ln -s /ark-contexts/data/sd/outputs stable-diffusion-webui/outputs
+ln -s /ark-contexts/data/sd/models /app/stable-diffusion-webui/models
+ln -s /ark-contexts/data/sd/extensions /app/stable-diffusion-webui/extensions
+ln -s /ark-contexts/data/sd/embeddings /app/stable-diffusion-webui/embeddings
+ln -s /ark-contexts/data/sd/outputs /app/stable-diffusion-webui/outputs
 if [[ ! -e stable-diffusion-webui/styles.csv ]]; then
-    ln -s /ark-contexts/data/sd/styles.csv stable-diffusion-webui/styles.csv
+    ln -s /ark-contexts/data/sd/styles.csv /app/stable-diffusion-webui/styles.csv
 fi
 
 # public dataset sd-base
@@ -137,10 +137,5 @@ then
     echo "simlink from sd-base done"
 fi
 
-
-rm /app/stable-diffusion-webui/venv/lib/python3.10/site-packages/gradio/routes.py
-cp /app/routes.py /app/stable-diffusion-webui/venv/lib/python3.10/site-packages/gradio/
-
-echo "gradio routes.py done"
 
 git config --global http.sslVerify false
